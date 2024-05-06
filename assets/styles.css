@@ -1,0 +1,66 @@
+:root {
+    --pastel-yellow: #f0d78c;
+    --snow-white: #fcfafa;
+    --sky-blue: #64c4ed;
+    --slate-blue: #4f81c7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 50px;
+    padding: 2px;
+    position: relative;
+    width: 100%;
+    background-color: var(--pastel-yellow);
+    color: var(--snow-white);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: solid var(--snow-white);
+    z-index: 10;
+}
+
+header h1 {
+    text-align: center;
+    flex: 1; /* to allow the h1 element to expand as needed */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    height: 100%;
+    display: flex; /* enable flexbox for children */
+    flex-direction: row; /* align children in a row */
+}
+
+/* Split the screen */
+.left,
+.right {
+    height: 94vh;
+    margin: 0;
+    padding: 10px;
+    background-color: var(--sky-blue);
+    border: 3px solid var(--snow-white);
+    overflow: hidden;
+    box-sizing: border-box; /* ensure padding and border are included in the height */
+}
+
+.left {
+    flex: 0 0 30%; /* set the element to exactly 30% of the container's width, without allowing it to grow or shrink. */
+}
+
+.right {
+    flex: 0 0 70%; /* set the element to exactly 70% of the container's width, without allowing it to grow or shrink. */
+}
+
+
