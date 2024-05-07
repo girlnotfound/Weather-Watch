@@ -27,11 +27,13 @@ header {
 
 header h1 {
     text-align: center;
-    flex: 1; /* to allow the h1 element to expand as needed */
+    flex: 1;
+    /* to allow the h1 element to expand as needed */
     font-family: 'Courier New', Courier, monospace;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -39,8 +41,18 @@ html, body {
 
 main {
     height: 100%;
-    display: flex; /* enable flexbox for children */
-    flex-direction: row; /* align children in a row */
+    display: flex;
+    /* enable flexbox for children */
+    flex-direction: row;
+    /* align children in a row */
+}
+
+.search-bar input[type=text] {
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
 }
 
 #submit {
@@ -53,7 +65,7 @@ main {
     margin-top: 10px;
 }
 
-#submit:hover{
+#submit:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -66,15 +78,18 @@ main {
     background-color: var(--sky-blue);
     border: 3px solid var(--snow-white);
     overflow: hidden;
-    box-sizing: border-box; /* ensure padding and border are included in the height */
+    box-sizing: border-box;
+    /* ensure padding and border are included in the height */
 }
 
 .left {
-    flex: 0 0 30%; /* set the element to exactly 30% of the container's width, without allowing it to grow or shrink. */
+    flex: 0 0 30%;
+    /* set the element to exactly 30% of the container's width, without allowing it to grow or shrink. */
 }
 
 .right {
-    flex: 0 0 70%; /* set the element to exactly 70% of the container's width, without allowing it to grow or shrink. */
+    flex: 0 0 70%;
+    /* set the element to exactly 70% of the container's width, without allowing it to grow or shrink. */
 }
 
 .left section {
