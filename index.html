@@ -12,9 +12,7 @@
 <body>
 
     <header>
-        <nav>
             <h1>&#127774; Weather Watch &#127774;</h1> 
-        </nav>
     </header>
 <main>
     <!-- left section -->
@@ -22,7 +20,8 @@
         <section>
             <div class="search-bar">
                 <form>
-                    <h2>Search For A City</h2>
+                    <label for="searchbar"> Search for a city </label>
+                    <br>
                     <input id="searchbar" type="text" placeholder="Search..">
                     <button type="submit" id="submit">Search</button>
                 </form>
@@ -31,13 +30,79 @@
     </div>
 
     <!-- right section -->
-    <div class="right">
-        <section>
-            
+    <div class="right"> 
+        
+        <section id="dashboard"> <!-- section to host the weather forecast of the city the user searches for -->
+            <div class="container">
+                <div class="weather-details">
+                    <h2> Search for a city to get the latest weather forecast </h2>
+                    <div class="weather-details">
+                        <p>Temp: <span id="temp-day-0"></span></p>
+                        <p>Wind: <span id="wind-day-0"></span></p>
+                        <p>Humidity: <span id="humidity-day-0"></span></p>
+                    </div>
+                </div>
+            </div>
         </section>
+        
+        <section id="forecast-section"> <!-- section to host the five day weather forecast cards -->
+            <h3 class="forecast-header"> Ready, set, forecast! Here's the weather for the next five days! </h3>
+            <div class="forecast-container">
+                <!-- five day weather cards-->
+                <!-- used articles to host each days individual forecast -->
+                <article class="weather-card">
+                    <h4 class="date"> Day 1 </h4>
+                    <div class="weather-details">
+                        <p>Temp: <span id="temp-day-1"></span></p>
+                        <p>Wind: <span id="wind-day-1"></span></p>
+                        <p>Humidity: <span id="humidity-day-1"></span></p>
+                    </div>
+                </article>
+
+                <article class="weather-card">
+                    <h4 class="date"> Day 2 </h4>
+                    <div class="weather-details">
+                        <p>Temp: <span id="temp-day-2"></span></p>
+                        <p>Wind: <span id="wind-day-2"></span></p>
+                        <p>Humidity: <span id="humidity-day-2"></span></p>
+                    </div>
+                </article>
+
+                <article class="weather-card">
+                    <h4 class="date"> Day 3 </h4>
+                    <div class="weather-details">
+                        <p>Temp: <span id="temp-day-3"></span></p>
+                        <p>Wind: <span id="wind-day-3"></span></p>
+                        <p>Humidity: <span id="humidity-day-3"></span></p>
+                    </div>
+                </article>
+
+                <article class="weather-card">
+                    <h4 class="date"> Day 4 </h4>
+                    <div class="weather-details">
+                        <p>Temp: <span id="temp-day-4"></span></p>
+                        <p>Wind: <span id="wind-day-4"></span></p>
+                        <p>Humidity: <span id="humidity-day-4"></span></p>
+                    </div>
+                </article>
+
+                <article class="weather-card">
+                    <h4 class="date"> Day 5 </h4>
+                    <div class="weather-details">
+                        <p>Temp: <span id="temp-day-5"></span></p>
+                        <p>Wind: <span id="wind-day-5"></span></p>
+                        <p>Humidity: <span id="humidity-day-5"></span></p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    
     </div>
 
 </main>
+
+<script src="./assets/js/script.js"></script>
 
 </body>
 
