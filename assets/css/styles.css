@@ -60,7 +60,7 @@ h3 {
     font-size: 17px;
 }
 
-#submit {
+#submit-button {
     background-color: var(--slate-blue);
     color: var(--snow-white);
     font-size: 16px;
@@ -68,10 +68,15 @@ h3 {
     transition-duration: 0.4s;
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-#submit:hover {
+#submit-button:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+#search-history {
+    margin-top: 10px;
 }
 
 /* Split the screen */
@@ -149,7 +154,36 @@ h3 {
 
 /* used media query for responsive design */ 
 @media screen and (max-width: 768px) {
+    header {
+        flex-direction: column; /* stack header elements vertically */
+    }
+
+    header h1 {
+        margin-top: 10px;
+    }
+    
+    main {
+        flex-direction: column; /* stack main content vertically */
+    }
+
+    .left,
+    .right {
+        flex: 0 0 100%; /* so each side section takes full width */
+        height: auto; /* allow height to adjust based on content */
+    }
+
+    .search-bar input[type=text],
+    #submit-button {
+        width: 100%; /* so inputs and button span full width */
+        margin-right: 0; /* remove right margin */
+    }
+
+    .submit-button {
+        padding: 8px;
+        font-size: 14px; /* smaller button text and padding */
+    }
+
     .weather-card {
-        flex-basis: 45%; /* adjust cards for on mobile layout */
+        flex-basis: 100%; /* so weather cards use full width */
     }
 }
