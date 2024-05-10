@@ -13,8 +13,7 @@ const searchHistoryEl = document.getElementById('search-history');
 
 // Function to get city coordinates 
 function getCityCoordinates(city, apiKey) {
-    fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=1&appid=${apiKey}`
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},&limit=1&appid=${apiKey}`
     )
         .then(function (response) {
             return response.json(); // convert to JSON
@@ -50,3 +49,17 @@ function getWeatherData(lat, lon, apiKey) {
             }
         });
 }
+
+// Function to handle form submission
+function handleCitySearch(event) {
+    event.preventDefault();
+    const city = searchBar.value.trim(); // get the city name from the search bar and remove extra spaces
+    if (city) { // check if the search bar is not empty
+        getCityCoordinates(city, apiKey); 
+        searchBar.value = ''; // clear the search
+        }
+}
+
+// event listener for form submission
+formEl.addEventListener('submit', handleCitySearch);
+
