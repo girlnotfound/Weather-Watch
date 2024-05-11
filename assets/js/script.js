@@ -27,13 +27,14 @@ function getCityCoordinates(city, apiKey) {
                 // extract lattitude and longitude
                 let lat = data[0].lat; 
                 let lon = data[0].lon; 
-                getWeatherData(lat, lon, apiKey); // call the weather API function to get the weather data
+                getWeatherData(lat, lon, apiKey, city); // call the weather API function to get the weather data
             }
         });
 }
 
 // function to get weather data
-function getWeatherData(lat, lon, apiKey) {
+function getWeatherData(lat, lon, apiKey, city) {
+    let currentDate = new Date().toLocaleDateString(); 
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
     )
         .then(function(response) {
@@ -41,10 +42,10 @@ function getWeatherData(lat, lon, apiKey) {
         })
         .then(function(data) {
              // check if no weather data is available
-            if (data.length === 0) {
+            if (!data.length === 0) {
                 alert("Sorry, currently no weather information available.");
             } else {
-                updateDailyWeather(data); // call the updateDailyWeather function here
+                updateDailyWeather(data, city, currentDate); // call the updateDailyWeather function here
                 updateDashboard(data); // call the updateDashboard function here
             }
         })
@@ -55,10 +56,13 @@ function getWeatherData(lat, lon, apiKey) {
 }
 
 // function to update weather details for the dashboard section
-function updateDailyWeather(data) {
+function updateDailyWeather(data, city, currentDate) {
     // check if the weather data exists and if there are forecast entries
     if (data && data.list && data.list.length > 0) {
         const dayData = data.list[0]; // weather data for the first day
+        // update city name and current date
+        document.getElementById('city-name').textContent = city;
+        document.getElementById('current-date').textContent = currentDate;
         // update temperature
         document.getElementById('temp-day-0').textContent = `${dayData.main.temp}\u00B0`;
         // update wind
@@ -109,12 +113,46 @@ function updateDashboard(data) {
 // Function to handle form submission
 function handleCitySearch(event) {
     event.preventDefault();
-    const city = searchBar.value.trim(); // get the city name from the search bar and remove extra spaces
+    city = searchBar.value.trim(); // get the city name from the search bar and remove extra spaces
     if (city) { // check if the search bar is not empty
         getCityCoordinates(city, apiKey); 
         searchBar.value = ''; // clear the search
+        searchHistory.push(city);
+        // store the updated searchHistory in localStorage
+        localStorage.setItem('search-history', JSON.stringify(searchHistory));
+        // update the search history display
+        displaySearch();
         }
+}
+
+function displaySearch() {
+    // clear the search history element
+    searchHistoryEl.innerHTML = "";
+
+    // loop through each city in the search history and create a button for it
+    for (let city of searchHistory) {
+        // create a button element for the city
+        const cityButton = document.createElement('button');
+        cityButton.setAttribute('class', 'cityButton'); // add class attribute for styling
+        cityButton.textContent = city; // set the text content of the button to the city name
+        cityButton.addEventListener('click', function() {
+            // call getCityCoordinates function when a city button is clicked
+            getCityCoordinates(city, apiKey);
+        });
+        searchHistoryEl.append(cityButton); // append the city button to the search history element
+    }
+}
+
+function historySearch(e) {
+    const cityName = e.target.textContent;
+   getCityCoordinates(cityName);
+}
+
+// display search history on page load if there is at least 1 city to display
+if (searchHistory.length > 0) {
+    displaySearch();
 }
 
 // event listeners
 formEl.addEventListener('submit', handleCitySearch);
+searchHistoryEl.addEventListener('click', historySearch);
