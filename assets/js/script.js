@@ -1,6 +1,5 @@
 // create variables for API key and base URL
-const apiKey = "deeddd3f4c6c7872ae67649acfc3e05f"; 
-const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={apiKey}`;
+const apiKey = `deeddd3f4c6c7872ae67649acfc3e05f`; 
 let city = "";
 // create variable to retreive search history from local storage
 let searchHistory = JSON.parse(localStorage.getItem("search-history")) || [];
@@ -42,7 +41,7 @@ function getWeatherData(lat, lon, apiKey, city) {
         })
         .then(function(data) {
              // check if no weather data is available
-            if (!data.length === 0) {
+            if (data.length === 0) {
                 alert("Sorry, currently no weather information available.");
             } else {
                 updateDailyWeather(data, city, currentDate); // call the updateDailyWeather function here
@@ -120,6 +119,7 @@ function handleCitySearch(event) {
         searchHistory.push(city);
         // store the updated searchHistory in localStorage
         localStorage.setItem('search-history', JSON.stringify(searchHistory));
+        localStorage.setItem('last-searched', city); // store last searched city
         // update the search history display
         displaySearch();
         }
@@ -145,7 +145,7 @@ function displaySearch() {
 
 function historySearch(e) {
     const cityName = e.target.textContent;
-   getCityCoordinates(cityName);
+   getCityCoordinates(cityName, apiKey);
 }
 
 // display search history on page load if there is at least 1 city to display
@@ -155,4 +155,5 @@ if (searchHistory.length > 0) {
 
 // event listeners
 formEl.addEventListener('submit', handleCitySearch);
+// to make sure history buttons clickable
 searchHistoryEl.addEventListener('click', historySearch);
